@@ -1,0 +1,138 @@
+<!-- Cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Cart Page</title>
+  <link rel="stylesheet" href="./cart.css" />
+  <link rel="stylesheet" href="./Home.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body class="bod">
+<nav class="navbar navbar-expand-lg navbar-light px-3 bg-dark sticky-top">
+
+  <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+    <a class="navbar-brand navlogo1 text-nowrap" href="./Home.html">Tech-Shop</a>
+    <div class="d-flex align-items-center icon-group ms-auto">
+      <div class="search-wrapper position-relative me-3" style="min-width:200px; max-width:320px;">
+        <input id="site-search" type="search" placeholder="Search products..." aria-label="Search products"
+               class="form-control form-control-sm" autocomplete="off"
+               style="min-width:200px; max-width:320px; background:#111; color:#fff; border:1px solid rgba(255,255,255,0.06);" />
+        <div id="search-suggestions" class="list-group position-absolute" style="z-index:1050; width:100%; display:none; max-height:240px; overflow:auto;"></div>
+      </div>
+
+      <a href="./Cart.html" class="position-relative d-inline-block me-3">
+        <i class="fa-solid fa-cart-shopping pe-md-5 px-2 icons_hover_zoome" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart"></i>
+        <span id="cart-count" class="ooo badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"></span>
+      </a>
+
+      <div class="">
+        <div class="btn-group">
+          <button type="button" class="btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <span><i class="fa-solid fa-user-large px-2 icons_hover_zoome user_set_small" data-bs-toggle="tooltip" data-bs-placement="bottom" title="User"></i></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-lg-end mt-3 bg_user border border-white border-2">
+            <div style="width: 18rem">
+              <div class="card-body">
+                <h4 class="card-title user_font">Hello!</h4>
+                <p class="card-text user_font">Access account and manage orders</p>
+                <a href="#" class="btn btn_user user_font" data-bs-toggle="modal" data-bs-target="#exampleModal">Login/Signup</a>
+                <hr class="text-muted" style="height: 3px" />
+                <p class="user_font">Please Login</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- Empty Cart -->
+      <div id="empty-cart" class="cart-wrapper" style="display:none">
+        <div class="cart-container text-center">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <i class="fa-solid fa-xmark x-mark"></i>
+        </div>
+        <p class="empty-text">Your Cart is Empty</p>
+        <button class="btn1" onclick="window.location.href='Home.html'">Start Shopping</button>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cart-items"></div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="col-md-4">
+      <div class="summary-box" id="order-summary">
+        <h5>Order Summary (<span id="cart-count-summary">0</span> items)</h5>
+        <div class="mb-2">
+          <select id="cart-sort" class="form-select form-select-sm" aria-label="Sort cart items">
+            <option value="default">Sort cart</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+          </select>
+        </div>
+        <hr />
+        <p>Original Price <span id="subtotal">₹0</span></p>
+        <p>Discount <span class="discount">-₹0</span></p>
+        <p>Delivery <span class="text-success">Free</span></p>
+        <hr />
+        <h5 class="total">Total Price <span id="total">₹0</span></h5>
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="mt-5">
+  <div class="container-flued foot-margin">
+    <div class="text-start">
+      <div class="row">
+        <div class="col-8"><p>2025 | All Rights Reserved by Satya &copy;.</p></div>
+        <div class="col-4 text-end">
+          <div class="d-flex flex-row justify-content-evenly">
+            <div class="fa-brands fa-facebook-f fs-5"></div>
+            <div class="fa-brands fa-twitter fs-5"></div>
+            <div class="fa-brands fa-instagram fs-5"></div>
+            <div class="fa-brands fa-linkedin-in fs-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Login Modal (simple fallback works) -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header">
+      <h1 class="login-title fs-5" id="exampleModalLabel">Login / Signup</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <p class="text-muted mb-3">New to Tech-Shop? We'll create a demo account if it doesn't exist.</p>
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control mb-3" id="email" >
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control mb-3" id="password">
+      <button class="btn w-100 text-white" style="background:#e50914;">Continue</button>
+      <div class="text-center mt-3">or login with</div>
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-primary flex-fill">Facebook</button>
+        <button class="btn btn-danger flex-fill">Google</button>
+        <button class="btn btn-info flex-fill">Twitter</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product Details - Tech-Shop</title>
+  <link href="./Home.css" rel="stylesheet" />
+  <link href="./Cart.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    /* Product details specific styles */
+    .product-wrapper { padding:2rem 3rem; background:#0e1111; min-height:70vh; color:white; }
+    .thumbs { display:flex; flex-direction:column; gap:14px; }
+    .thumbs img { width:76px; height:76px; object-fit:contain; border:1px solid rgba(255,255,255,0.08); padding:6px; cursor:pointer; border-radius:6px; }
+    .thumbs img.active { outline: 3px solid rgba(229,9,20,0.9); }
+    .product-image { width:100%; max-width:520px; height:auto; object-fit:contain; display:block; margin:0 auto; }
+    .price-big { font-size:1.6rem; font-weight:700; color:#fff; }
+    .old-price { color:#888; text-decoration:line-through; margin-left:12px; }
+    .badge-instock { background:#1b9b3a; color:white; padding:6px 10px; border-radius:6px; font-weight:600; }
+    .spec-list { color: #d6d6d6; margin-top:1rem; }
+    .tabs-custom { margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.04); }
+    .tab-btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color:#d6d6d6; padding:10px 18px; border-radius:6px; }
+    .tab-btn.active { background:#e50914; color:white; border-color:#e50914; }
+    .review-item { display:flex; gap:14px; margin-bottom:28px; align-items:flex-start; }
+    .review-avatar { width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; font-weight:700; color:#999; }
+    @media (max-width: 991px) {
+      .product-wrapper { padding:1.5rem; }
+      .thumbs { flex-direction:row; justify-content:center; margin-bottom:1rem; }
+      .thumbs img { width:64px; height:64px; }
+    }
+
+    /* Ensure navbar is sticky and cart badge visible */
+    .navbar.sticky-top, .navbar { position: sticky; top: 0; z-index: 1050; }
+    /* cart count badge visibility (white number) */
+    #cart-count { color: #fff !important; }
+
+    /* Make the description area readable */
+    .product-desc p { color: #cfcfcf; line-height:1.7; }
+  </style>
+</head>
+<body class="bg-dark text-white">
+  <!-- NAVBAR (same look as your Home) -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <a class="navbar-brand navlogo1" href="./Home.html">Tech-Shop</a>
+
+      <div class="d-flex align-items-center icon-group ms-auto">
+        <i id="search-icon" class="fa-solid fa-magnifying-glass pe-md-3 px-2 icons_hover_zoome" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" style="cursor:pointer;color:white;"></i>
+
+        <a href="./Cart.html" class="position-relative ms-3">
+          <i class="fa-solid fa-cart-shopping pe-md-5 px-2 icons_hover_zoome" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart"></i>
+          <span id="cart-count" class="position-absolute badge rounded-pill bg-danger" style="font-size: 0.7rem; display: none;"></span>
+        </a>
+
+        <div class="ms-3">
+          <div class="btn-group">
+            <button type="button" class="btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+              <span><i class="fa-solid fa-user-large px-2 icons_hover_zoome user_set_small" data-bs-toggle="tooltip" data-bs-placement="bottom" title="User"></i></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-lg-end mt-3 bg_user border border-white border-2" style="min-width:200px;">
+              <div style="height: 13rem; width: 20rem; padding-top:1.5rem">
+                <div class="card-body">
+                  <h4 class="card-title user_font">Hello!</h4>
+                  <p class="card-text user_font">Access account and manage orders</p>
+                  <a href="#" class="btn btn_user user_font" id="open-signin">Sign in</a>
+                  <a href="#" class="btn btn_user user_font ms-2" id="open-signup">Sign up</a>
+                  <hr class="text-muted" style="height: 3px" />
+                  <p class="user_font">Please Login</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- PRODUCT AREA -->
+  <main class="container product-wrapper">
+    <div class="row g-4 align-items-start">
+      <!-- thumbnails -->
+      <div class="col-lg-2 d-none d-lg-flex">
+        <div class="thumbs" id="thumbs">
+          <!-- thumbnails will be injected -->
+        </div>
+      </div>
+
+      <!-- main image -->
+      <div class="col-lg-6 col-md-12 text-center">
+        <img id="pd-image" src="./placeholder.png" alt="product" class="product-image" />
+      </div>
+
+      <!-- right details -->
+      <div class="col-lg-4 col-md-12">
+        <h2 id="pd-title">Product Title</h2>
+        <p id="pd-sub" class="text-muted">Short description</p>
+
+        <div class="d-flex align-items-baseline mb-3 gap-3">
+          <div class="price-big" id="pd-price">₹0</div>
+          <div class="old-price" id="pd-old">₹0</div>
+        </div>
+
+        <div class="mb-3">
+          <span class="badge-instock">In Stock</span>
+        </div>
+
+        <p class="product-desc" id="pd-desc">Short full description</p>
+
+        <div class="d-flex gap-2 mt-3">
+          <button id="pd-add" class="btn" style="background:#e50914;color:#fff"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          <button id="pd-wish" class="btn btn-outline-light">Wishlist</button>
+        </div>
+
+        <div class="specs mt-4">
+          <h6>Product Details</h6>
+          <ul id="pd-specs" class="spec-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs: Overview / Specs / Reviews -->
+    <div class="tabs-custom">
+      <div class="d-flex gap-3 justify-content-center mb-4">
+        <button class="tab-btn" data-tab="overview">Overview</button>
+        <button class="tab-btn active" data-tab="specs">Specifications</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+      </div>
+
+      <div id="tab-content">
+        <div data-content="overview" style="display:none;">
+          <h4>Overview</h4>
+          <p id="overview-text">Product overview goes here...</p>
+        </div>
+
+        <div data-content="specs" style="display:block;">
+          <h4>Specifications</h4>
+          <ul id="specs-list"></ul>
+        </div>
+
+        <div data-content="reviews" style="display:none;">
+          <h4>Reviews</h4>
+          <div id="reviews-list" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-muted p-3 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col">© 2025 | All Rights Reserved by Satya</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Product data fallback (you can extend this or fetch remotely)
+    const PRODUCTS = [
+      { id: "1", name:"JBL Live 660NC Wireless Over-Ear NC Headphones", price:899, oldPrice:2999, img:"./jbl660nc-1.png",
+        images:["./jbl660nc-1.png","./jbl660nc-2.png","./jbl660nc-3.png"],
+        desc:"High-quality over-ear headphones with active noise cancellation and long battery life.",
+        specs:["Wireless","Noise Cancelling","20 hrs battery","Bluetooth 5.0"],
+        reviews:[
+          { name:"Atharva Kumar", text:"Sound is awesome and as I expected, love it.", rating:5, date:"4 Aug 2022" },
+          { name:"Ritika Sen", text:"Very good and awesome product", rating:5, date:"15 July 2022" }
+        ]
+      },
+      { id: "2", name:"boAT Airdopes 131 Wireless In-Ear Earbuds", price:1099, oldPrice:2999, img:"./boat131-1.png",
+        images:["./boat131-1.png","./boat131-2.png","./boat131-case.png"],
+        desc:"True wireless earbuds with compact design and charging case.",
+        specs:["True Wireless","Compact","Charging case"],
+        reviews:[{name:"Sonal", text:"Great for gym!", rating:4, date:"1 Jan 2023"}]
+      }
+      // add more products if you want...
+    ];
+
+    function getQuery(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function findProductById(id) {
+      id = String(id || "").trim();
+      if (!id) return PRODUCTS[0];
+      let p = PRODUCTS.find(x => String(x.id) === id);
+      if (p) return p;
+      // try find by name substring
+      return PRODUCTS.find(x => x.name.toLowerCase().includes(id.toLowerCase())) || PRODUCTS[0];
+    }
+
+    // safe cart helpers (same key as your site)
+    const CART_KEY = "ts_cart";
+    function safeReadCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[];}catch(e){return [];} }
+    function safeWriteCart(c){ try{ localStorage.setItem(CART_KEY,JSON.stringify(c)); }catch(e){} }
+    function updateHeaderBadge() {
+      const totalQty = (safeReadCart()).reduce((s,i)=> s + (Number(i.qty)||0), 0);
+      document.querySelectorAll("#cart-count").forEach(b=>{
+        if (totalQty>0) { b.style.display = "inline-block"; b.textContent = totalQty; } else { b.style.display = "none"; b.textContent = ""; }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const id = getQuery("id") || "1";
+      const product = findProductById(id);
+
+      // fill data
+      document.getElementById("pd-image").src = product.images?.[0] || product.img || "./placeholder.png";
+      document.getElementById("pd-title").textContent = product.name;
+      document.getElementById("pd-sub").textContent = product.name;
+      document.getElementById("pd-price").textContent = `₹${product.price?.toLocaleString('en-IN') || 0}`;
+      document.getElementById("pd-old").textContent = product.oldPrice ? `₹${product.oldPrice?.toLocaleString('en-IN')}` : "";
+      document.getElementById("pd-desc").textContent = product.desc || "";
+      document.getElementById("overview-text").textContent = product.desc || "";
+
+      // specs list
+      const specsList = document.getElementById("pd-specs");
+      specsList.innerHTML = "";
+      (product.specs||[]).forEach(s => { const li=document.createElement("li"); li.textContent=s; specsList.appendChild(li); });
+
+      // thumbnails
+      const thumbs = document.getElementById("thumbs");
+      thumbs.innerHTML = "";
+      (product.images || [product.img]).forEach((src, idx) => {
+        const img = document.createElement("img");
+        img.src = src || "./placeholder.png";
+        img.alt = product.name + " " + (idx+1);
+        img.dataset.index = idx;
+        if (idx === 0) img.classList.add("active");
+        img.addEventListener("click", () => {
+          document.getElementById("pd-image").src = img.src;
+          thumbs.querySelectorAll("img").forEach(i=>i.classList.remove("active"));
+          img.classList.add("active");
+        });
+        thumbs.appendChild(img);
+      });
+
+      // specs (tab)
+      const specsTabList = document.getElementById("specs-list");
+      specsTabList.innerHTML = "";
+      (product.specs||[]).forEach(s => { const li=document.createElement("li"); li.textContent = s; specsTabList.appendChild(li); });
+
+      // reviews
+      const reviewsList = document.getElementById("reviews-list");
+      reviewsList.innerHTML = "";
+      (product.reviews||[]).forEach(r => {
+        const div = document.createElement("div");
+        div.className = "review-item";
+        div.innerHTML = `
+          <div class="review-avatar">${(r.name||"U").split(" ").map(x=>x[0]).join("").slice(0,2)}</div>
+          <div>
+            <div style="font-weight:700; color:white;">${r.name} <span style="font-weight:600; color:#888; font-size:0.9rem; margin-left:8px;">| ${r.date}</span></div>
+            <div style="color:#e50914; margin:6px 0;">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</div>
+            <div style="color:#cfcfcf;">${r.text}</div>
+          </div>
+        `;
+        reviewsList.appendChild(div);
+      });
+
+      // tab switching
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+          btn.classList.add("active");
+          const chosen = btn.dataset.tab;
+          document.querySelectorAll("[data-content]").forEach(c => {
+            c.style.display = (c.getAttribute("data-content") === chosen) ? "block" : "none";
+          });
+        });
+      });
+
+      // Add to cart button
+      document.getElementById("pd-add").addEventListener("click", () => {
+        const current = safeReadCart();
+        const existing = current.find(i => String(i.id) === String(product.id));
+        if (existing) existing.qty = Number(existing.qty||0) + 1;
+        else current.push({ id: product.id || product.name, name: product.name, price: product.price || 0, oldPrice: product.oldPrice || product.price || 0, img: product.img || "./placeholder.png", qty: 1 });
+        safeWriteCart(current);
+        updateHeaderBadge();
+        const btn = document.getElementById("pd-add");
+        btn.innerHTML = "Added ✓";
+        btn.disabled = true;
+        setTimeout(()=>{ btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart'; btn.disabled = false; }, 1000);
+      });
+
+      updateHeaderBadge();
+    });
+
+  </script>
+</body>
+</html>

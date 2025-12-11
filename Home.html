@@ -1,0 +1,660 @@
+<!-- Home.html (updated: product grid fully expanded) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Tech-Shop</title>
+<link href="./Home.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="./cart.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light px-3 bg-dark sticky-top">
+
+  <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+    <a class="navbar-brand navlogo1 text-nowrap icons_hover_zoome" href="Home.html">Tech-Shop</a>
+
+    <!-- icon-group: search ICON (toggles input), cart, user -->
+    <div class="d-flex align-items-center icon-group me-md-4 ms-auto">
+      <!-- Search icon -->
+      <i id="search-icon" class="fa-solid fa-magnifying-glass pe-md-3 px-2 icons_hover_zoome" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search" style="cursor:pointer;color:white;"></i>
+
+      <!-- Hidden search input (will be toggled when icon clicked) -->
+      <div id="search-wrapper" class="position-relative" style="display:none; min-width:200px; max-width:320px; margin-left:8px;">
+        <input id="site-search" type="search" placeholder="Search products..." aria-label="Search products"
+               class="form-control form-control-sm" autocomplete="off"
+               style="background:#111; color:#fff; border:1px solid rgba(255,255,255,0.06);" />
+        <div id="search-suggestions" class="list-group position-absolute" style="z-index:1050; width:100%; display:none; max-height:240px; overflow:auto;"></div>
+      </div>
+
+      <!-- Cart icon -->
+      <a href="./Cart.html" class="position-relative ms-3">
+        <i class="fa-solid fa-cart-shopping pe-md-5 px-2 icons_hover_zoome" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart"></i>
+        <span id="cart-count" class="position-absolute badge rounded-pill bg-danger badge-count1" style="font-size: 0.7rem; display: none;"></span>
+      </a>
+
+      <!-- User dropdown -->
+      <div class="ms-3">
+        <div class="btn-group">
+          <button type="button" class="btn" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <span>
+              <i class="fa-solid fa-user-large px-2 icons_hover_zoome user_set_small" data-bs-toggle="tooltip" data-bs-placement="bottom" title="User"></i>
+            </span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-lg-end mt-3 bg_user border border-white border-2" style="min-width:200px;">
+            <div style="height: 13rem; width: 20rem; padding-top:1.5rem">
+              <div class="card-body">
+                <h4 class="card-title user_font">Hello!</h4>
+                <p class="card-text user_font">Access account and manage orders</p>
+                <a href="#" class="btn btn_user user_font" id="open-signin">Sign in</a>
+                <a href="#" class="btn btn_user user_font ms-2" id="open-signup">Sign up</a>
+                <hr class="text-muted" style="height: 3px" />
+                <p class="user_font">Please Login</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Carousel -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <span class="bg-watermark">In Ear</span>
+      <div class="carousel-text">
+        <p class="para1">boAt Airdopes</p>
+        <h1>Featherweight For<br />Comfort All-Day.<br /></h1>
+        <p>₹1,099 <del>₹2,990</del></p>
+        <button type="button" class="carousel-shop">Shop Now</button>
+      </div>
+      <img src="./boat131-1.png" class="d-block carousel-img" alt="image"/>
+    </div>
+    <div class="carousel-item">
+      <span class="bg-watermark">Over Ear</span>
+      <div class="carousel-text">
+        <p class="para1">Sony WH-XB910N</p>
+        <h1>Give Your Favorite <br />Music A Boost<br /></h1>
+        <p>₹13,489 <del>₹19,990</del></p>
+        <button type="button" class="carousel-shop">Show Now</button>
+      </div>
+      <img src="./sonyXb910n-1.png" class="d-block carousel-img" alt="image"/>
+    </div>
+    <div class="carousel-item">
+      <span class="bg-watermark">On Ear</span>
+      <div class="carousel-text">
+        <p class="para1">JBL Live 660NC</p>
+        <h1>Keep The Noise Out<br /> Or In. You Choose<br /></h1>
+        <p>₹9,999 <del>₹14,999</del></p>
+        <button type="button" class="carousel-shop">Shop Now</button>
+      </div>
+      <img src="./jbl660nc-1.png" class="d-block carousel-img" alt="Sony WH-XB910ON"/>
+    </div>
+  </div>
+
+  <div class="carousel-indicators custom-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+</div>
+
+<!-- Featured Products Slider -->
+<div class="carousel-container">
+  <h1 style="text-align: center; color: white" class="pb-5 margin-forh1">Featured Products</h1>
+  <div class="carousel-track" id="carouselTrack">
+    <div class="carousel-item-custom">
+      <p class="product_font_carousel">At Rockerz518</p>
+      <img src="./boat255r-1.png" alt="image" class="img-fluid" />
+      <h4 class="product_font_head">₹5,999 <span class="text-muted"><s>₹3,999</s></span></h4>
+    </div>
+    <div class="carousel-item-custom">
+      <p class="product_font_carousel">JBL Tune 760NC</p>
+      <img src="./jbl760nc-1.png" alt="image" class="img-fluid" />
+      <h4 class="product_font_head">₹5,999 <span class="text-muted"><s>₹7,999</s></span></h4>
+    </div>
+    <div class="carousel-item-custom">
+      <p class="product_font_carousel">boAT Rockerz 255</p>
+      <img src="./jbl-endu-1.png" alt="image" class="img-fluid" />
+      <h4 class="product_font_head">₹899 <span class="text-muted"><s>₹2,999</s></span></h4>
+    </div>
+    <div class="carousel-item-custom">
+      <p class="product_font_carousel">JBL Endurance Run Sports</p>
+      <img src="./boat203-1.png" alt="boAT Rockerz 255" class="img-fluid"/>
+      <h4 class="product_font_head">₹999 <span class="text-muted"><s>₹1,599</s></span></h4>
+    </div>
+    <div class="carousel-item-custom">
+      <p class="product_font_carousel"></p>
+      <img src="./boat518-1.png" alt="image" class="img-fluid"/>
+      <h4 class="product_font_head">₹1,074 <span class="text-muted"><s>₹27,999</s></span></h4>
+    </div>
+  </div>
+  <div class="featured-indicators"></div>
+</div>
+
+<!-- Top Products -->
+<div class="container-fluid top-bg-pro">
+  <h3 style="text-align: center; color: whitesmoke" class="p-4">Top Products</h3>
+  <div class="button-container">
+    <button class="btn active text-white button_first_prod">All</button>
+    <button class="btn text-white">Headphones</button>
+    <button class="btn text-white">Earbuds</button>
+    <button class="btn text-white">Earphones</button>
+    <button class="btn text-white">Neckbands</button>
+  </div>
+
+  <div class="container-fluid mt-5 mt-nav">
+
+    <div class="row justify-content-center gx-4 gy-4 column_small_deci">
+
+      <!-- Product 1 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="headphones" data-id="1">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=1">
+            <img src="./jbl660nc-1.png" class="card-img-top" alt="JBL Live 660NC" />
+          </a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">JBL Live 660NC</h5>
+            <p class="card-text">Wireless Over-Ear NC <br/>Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹899
+              <span class="text-muted"><s class="font_mute_c">₹2,999</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart" data-id="1"
+              data-name="JBL Live 660NC Wireless Over-Ear NC Headphones"
+              data-price="899"
+              data-oldprice="2999"
+              data-image="./jbl660nc-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="headphones" data-id="2">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=2"><img src="./boat518-2.png" class="card-img-top" alt="boAT Rockerz 518" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">boAT Rockerz 518</h5>
+            <p class="card-text">On-Ear Wireless <br />Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹1,299<span class="text-muted"><s class="font_mute_c">₹3,999</s></span></h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart" data-id="2"
+              data-name="boAT Rockerz 518 On-Ear Wireless Headphones"
+              data-price="1299" data-oldprice="3999" data-image="./boat518-2.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="earbuds" data-id="3">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=3"><img src="./boat131-1.png" class="card-img-top" alt="boAT Airdopes 131" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i><i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">boAT Airdopes 131</h5>
+            <p class="card-text">Wireless In - Ear <br />Earbuds</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹1,099<span class="text-muted"><s class="font_mute_c">₹2,999</s></span></h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="3" data-name="boAT Airdopes 131 Wireless In-Ear Earbuds"
+              data-price="1099" data-oldprice="2999" data-image="./boat131-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="earphones" data-id="4">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=4"><img src="./boat110-1.png" class="card-img-top" alt="boAT BassHeads 110" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">boAT BassHeads 110</h5>
+            <p class="card-text">In-Ear Wired <br/>Earphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹899<span class="text-muted"><s class="font_mute_c">₹2,999</s></span></h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="4" data-name="boAT BassHeads 110 In-Ear Wired Earphones Headphones"
+              data-price="899" data-oldprice="2999" data-image="./boat110-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="headphones" data-id="5">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=5"><img src="./boat410-1.png" class="card-img-top" alt="boAT Rockerz 410" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>--–=================
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">boAt Rockerz 410</h5>
+            <p class="card-text">Bluetooth & Wired<br />On-Ear Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹1,599
+              <span class="text-muted"><s class="font_mute_c">₹6,999</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="5" data-name="boAt Rockerz 410 Bluetooth & Wired On-Ear Headphones"
+              data-price="1599" data-oldprice="6999" data-image="./boat410-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="neckbands" data-id="6">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=6"><img src="./jbl200bt-1.png" class="card-img-top" alt="JBL Live 200Bt" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">JBL Live 200Bt</h5>
+            <p class="card-text">In-Ear Wireless Neck<br />Band Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹3,699
+              <span class="text-muted"><s class="font_mute_c">₹5,229</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="6" data-name="JBL Live 200Bt In-Ear Wireless Neck Band Headphones"
+              data-price="3699" data-oldprice="5229" data-image="./jbl200bt-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="headphones" data-id="7">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=7"><img src="./sonyXb910n-1.png" class="card-img-top" alt="Sony WH-XB910ON" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">Sony WH-XB910ON</h5>
+            <p class="card-text">Wireless Over-Ear <br />Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹13,499
+              <span class="text-muted"><s class="font_mute_c">₹19,990</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="7" data-name="Sony WH-XB910ON Wireless Over-Ear Headphones"
+              data-price="13499" data-oldprice="19990" data-image="./sonyXb910n-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="headphones" data-id="8">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=8"><img src="./jbl760nc-1 (1).png" class="card-img-top" alt="JBL Tune 760NC" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">JBL Tune 760NC</h5>
+            <p class="card-text">Wireless Over-Ear NC <br/>Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹5,999
+              <span class="text-muted"><s class="font_mute_c">₹7,999</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="8" data-name="JBL Tune 760NC Wireless Over-Ear NC Headphones"
+              data-price="5999" data-oldprice="7999" data-image="./jbl760nc-2.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 9 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="neckbands" data-id="9">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=9"><img src="./boat255r-2.png" class="card-img-top" alt="boAT Rockerz 255" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">boAT Rockerz 255</h5>
+            <p class="card-text">In-Ear Wireless<br />Neckbands</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹899<span class="text-muted"><s class="font_mute_c">₹2,999</s></span></h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="9" data-name="boAT Rockerz 255 In-Ear Wireless Neckbands"
+              data-price="899" data-oldprice="2999" data-image="./boat255r-2.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 10 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="earbuds" data-id="10">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=10"><img src="./jbl100-1.png" class="card-img-top" alt="JBL Wava 100" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">JBL Wava 100</h5>
+            <p class="card-text">In-Ear Truly Wireless <br/>Earbuds</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹5,999
+              <span class="text-muted"><s class="font_mute_c">₹8,999</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="10" data-name="JBL Wava 100 In-Ear Truly Wireless Earbuds"
+              data-price="5999" data-oldprice="8999" data-image="./jbl100-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 11 -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col" data-category="earbuds" data-id="11">
+        <div class="card h-100 bg-dark border border-white">
+          <a href="./product_details.html?id=11"><img src="./sony1000xm4-1.png" class="card-img-top" alt="Sony WF-1000XM4" /></a>
+          <div class="card-body card_font_s">
+            <div class="pt-2 pl-2 pb-3">
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+              <i class="fas fa-star text-danger"></i>
+            </div>
+            <h5 class="card-title">Sony WF-1000XM4</h5>
+            <p class="card-text">Wireless In-Ear NC <br/>Headphones</p>
+            <hr />
+            <h4 class="product_font_head my-4">₹19,999
+              <span class="text-muted"><s class="font_mute_c">₹24,999</s></span>
+            </h4>
+            <button type="button" class="btn card_button_bottom w-100 butn-add add-to-cart"
+              data-id="11" data-name="Sony WF-1000XM4 Wireless In-Ear NC Headphones"
+              data-price="19999" data-oldprice="24999" data-image="./sony1000xm4-1.png">
+              <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browse all products card (opens modal) -->
+      <div class="col-lg-3 col-md-3 col-12 custom-col">
+        <div class="card h-100 bg-dark border border-white d-flex align-items-center justify-content-center text-center">
+          <div class="card-body card_font_s d-flex flex-column align-items-center justify-content-center">
+            <h2 class="card-title">Browse all <br/>Product <i class="fa-solid fa-arrow-right-long"></i></h2>
+            <p class="mt-3">See quick details for every product</p>
+            <button type="button" class="btn btn-sm btn-outline-light mt-3 browse-all-btn" data-bs-toggle="modal" data-bs-target="#allProductsModal">
+              View products
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Advantages -->
+<div class="container-fluid bg-dark p-4 contain">
+  <h3 style="text-align: center; color: white" class="p-4">Our Advantages</h3>
+  <div class="d-flex gap-2 flex-nowrap">
+    <div class="feature-card bg-dark our-cntnr-margi">
+      <i class="fa-solid fa-truck-fast icon-box"></i>
+      <div class="text-box">
+        <p class="feature-title">Express Delivery</p>
+        <p class="feature-text">Ship in 24 Hours</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-shield-halved icon-box"></i>
+      <div class="text-box">
+        <p class="feature-title">Brand Warranty</p>
+        <p class="feature-text">100% Original products</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-tags icon-box"></i>
+      <div class="text-box">
+        <p class="feature-title">Exciting Deals</p>
+        <p class="feature-text">On All prepaid orders</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-credit-card icon-box"></i>
+      <div class="text-box">
+        <p class="feature-title">Secure Payments</p>
+        <p class="feature-text">SSL/Secure certificate</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container-fluid foot-margin">
+    <div class="row">
+      <div class="col-md-3">
+        <h3 id="w1" class="mb-4 footer_first_align"></h3>
+        <ul class="list-unstyled">
+          <li><p id="w2"></p></li>
+          <li><input type="email" name="email" placeholder="Email Address* " class="input-group flex-nowrap pt-2 pb-2 footer_inputs form-control input-bg"/></li>
+          <li><button type="button" class="btn float-start p-2 mt-3 fw-bolder button_facebook butn-add">Subscribe</button></li>
+        </ul>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 id="m1" class="mb-4"></h3>
+        <ul class="list-unstyled">
+          <li><p class="me-md-5 footer_hover">FAQs</p></li>
+          <li><p class="me-md-3 footer_hover">Track Order</p></li>
+          <li><p class="footer_hover">Cancel Order</p></li>
+          <li><p class="footer_hover">Return Order</p></li>
+          <li><p class="footer_hover">Warranty info</p></li>
+        </ul>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 id="k1" class="ps-md-3 mb-4"></h3>
+        <ul class="list-unstyled">
+          <li><p class="me-md-3 footer_hover">Return Policy</p></li>
+          <li><p class="me-md-5 footer_hover">Security</p></li>
+          <li><p class="me-md-5 footer_hover">Sitemap</p></li>
+          <li><p class="me-md-3 footer_hover">Privacy Policy</p></li>
+          <li><p class="ps-md-4 footer_hover">Terms & Conditions</p></li>
+        </ul>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3 id="foot-head" class="ps-md-0 mb-4">Company</h3>
+        <ul class="list-unstyled text-star">
+          <li><p class="dec1 footer_hover">About Us</p></li>
+          <li><p class="dec2 footer_hover">Contact Us</p></li>
+          <li><p class="dec3 footer_hover">Service Center</p></li>
+          <li><p class="dec4 footer_hover">Careers</p></li>
+          <li><p class="dec5 footer_hover">Affiliates</p></li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <div class="text-start">
+      <div class="row">
+        <div class="col-8">
+          <p>2025 | All Rights Reserved by Satya &copy;.</p>
+        </div>
+        <div class="col-4 text-end">
+          <div class="d-flex flex-row justify-content-evenly">
+            <div class="fa-brands fa-facebook-f fs-5"></div>
+            <div class="fa-brands fa-twitter fs-5"></div>
+            <div class="fa-brands fa-instagram fs-5"></div>
+            <div class="fa-brands fa-linkedin-in fs-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- All Products Modal (paste before body end) -->
+<div class="modal fade" id="allProductsModal" tabindex="-1" aria-labelledby="allProductsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content bg-dark text-white border-light">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="allProductsModalLabel">All Products</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <!-- left: product list -->
+          <div class="col-md-4 border-end" style="max-height:62vh; overflow:auto; padding-right:0.5rem;">
+            <div id="all-products-list" class="list-group list-group-flush">
+              <!-- JS will populate list items -->
+            </div>
+          </div>
+
+          <!-- right: product detail -->
+          <div class="col-md-8" id="all-product-detail" style="max-height:62vh; overflow:auto;">
+            <div class="d-flex gap-3">
+              <img id="allpd-image" src="./placeholder.png" alt="product" style="width:240px; height:auto; object-fit:contain; border-radius:6px;"/>
+              <div>
+                <h4 id="allpd-title">Select a product</h4>
+                <p id="allpd-sub" class="text-muted"></p>
+                <div class="d-flex align-items-baseline">
+                  <div class="h4 mb-0" id="allpd-price">₹0</div>
+                  <div class="text-muted ms-3" id="allpd-old" style="text-decoration: line-through;"></div>
+                </div>
+                <div class="mt-3" id="allpd-specs"></div>
+
+                <div class="mt-4 d-flex gap-2">
+                  <button id="allpd-add" class="btn" style="background:#e50914;color:#fff;">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                  </button>
+                  <button class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-3" />
+            <div id="allpd-description" class="text-muted" style="line-height:1.4"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-0">
+        <small class="text-muted">Click an item on the left to view details. Use keyboard arrows to navigate.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal (simple fallback reused) -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header">
+      <h1 class="login-title fs-5" id="exampleModalLabel">Login / Signup</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <p class="text-muted mb-3">New to Tech-Shop? We'll create a demo account if it doesn't exist.</p>
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control mb-3" id="email" >
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control mb-3" id="password">
+      <button class="btn w-100 text-white" style="background:#e50914;">Continue</button>
+      <div class="text-center mt-3">or login with</div>
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-primary flex-fill">Facebook</button>
+        <button class="btn btn-danger flex-fill">Google</button>
+        <button class="btn btn-info flex-fill">Twitter</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- Inline script to toggle search input on icon click and hide on outside click -->
+<script>
+  (function(){
+    const icon = document.getElementById('search-icon');
+    const wrapper = document.getElementById('search-wrapper');
+    const input = document.getElementById('site-search');
+    const suggestions = document.getElementById('search-suggestions');
+
+    function openSearch(){
+      wrapper.style.display = 'block';
+      if(input) { input.focus(); if(suggestions) suggestions.style.display = 'block'; }
+    }
+    function closeSearch(){
+      if(wrapper) wrapper.style.display = 'none';
+      if(suggestions) suggestions.style.display = 'none';
+      if(input) input.value = '';
+    }
+
+    icon?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if(wrapper.style.display === 'block') { closeSearch(); }
+      else { openSearch(); }
+    });
+
+    wrapper?.addEventListener('click', (e) => e.stopPropagation());
+
+    document.addEventListener('click', (e) => {
+      if(!e.composedPath().includes(icon) && !e.composedPath().includes(wrapper)) {
+        closeSearch();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeSearch();
+    });
+
+    if(window.bootstrap) {
+      [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].forEach(el => {
+        if(!el._bsTooltip) new bootstrap.Tooltip(el, { customClass: 'custom-tooltip' });
+      });
+    }
+  })();
+</script>
+
+<script src="./script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
